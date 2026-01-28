@@ -60,23 +60,29 @@ if not os.path.exists(db_path):
 
 os.makedirs(path, exist_ok=True)
 
+
 @bot.message_handler(commands=["start"])
 def main(message):
     THROTTLING[message.chat.id] = datetime.now()
     CDKEYBORDS[message.chat.id] = datetime.now() - COLLDOWN
     START_TIME[message.chat.id] = datetime.now()
 
-    admins = bot.get_chat_administrators(CHANNEL)
-    for admin in admins:
-        if admin.user.username == message.from_user.username:
-            print("admin detected")
-            bot.send_message(
-                message.chat.id,
-                "Обери що бажаєш редагувати",
-                reply_markup=edit_menu_markup,
-            )
-            print(f"{admin.user.username}")
-            return
+    # Check if message has QR code UUID (not just "/start")
+    has_qr_code = len(message.text.split()) > 1
+
+    # Show admin panel only if admin opens chat without QR code
+    if not has_qr_code:
+        admins = bot.get_chat_administrators(CHANNEL)
+        for admin in admins:
+            if admin.user.username == message.from_user.username:
+                print("admin detected")
+                bot.send_message(
+                    message.chat.id,
+                    "Обери що бажаєш редагувати",
+                    reply_markup=edit_menu_markup,
+                )
+                print(f"{admin.user.username}")
+                return
 
     with open(filename, "r") as file:
         data = json.loads(file.read())
