@@ -67,10 +67,8 @@ def main(message):
     CDKEYBORDS[message.chat.id] = datetime.now() - COLLDOWN
     START_TIME[message.chat.id] = datetime.now()
 
-    # Check if message has QR code UUID (not just "/start")
     has_qr_code = len(message.text.split()) > 1
 
-    # Show admin panel only if admin opens chat without QR code
     if not has_qr_code:
         admins = bot.get_chat_administrators(CHANNEL)
         for admin in admins:
