@@ -76,6 +76,7 @@ def main(message):
                 reply_markup=edit_menu_markup,
             )
             print(f"{admin.user.username}")
+            return
 
     with open(filename, "r") as file:
         data = json.loads(file.read())
@@ -110,6 +111,8 @@ def main(message):
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_handler(call):
+    bot.answer_callback_query(call.id)
+
     if call.data in callbacks:
         callbacks[call.data](call.message)
 
