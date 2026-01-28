@@ -1,4 +1,3 @@
-
 FROM python:3.12-slim
 
 WORKDIR /app
@@ -19,10 +18,5 @@ COPY . .
 
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
-
-VOLUME /app/data
-
-RUN adduser --disabled-password --gecos '' appuser
-USER appuser
 
 CMD ["python", "-u", "main.py"]

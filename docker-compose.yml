@@ -7,5 +7,6 @@ services:
     restart: unless-stopped
     volumes:
       - ./data:/app/data
+      - .env
     environment:
       - PYTHONUNBUFFERED=1
