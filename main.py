@@ -58,6 +58,8 @@ if not os.path.exists(db_path):
         print(f"Створено папку {folder_name}")
     print("Файл БД НЕ існує")
 
+os.makedirs(path, exist_ok=True)
+print(f"Створено папку {folder_name}")
 
 @bot.message_handler(commands=["start"])
 def main(message):

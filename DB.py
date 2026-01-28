@@ -5,14 +5,16 @@ from datetime import datetime
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 
+DATA_DIR = "/app/data"
+
 os.makedirs(DATA_DIR, exist_ok=True)
 
 folder_name = "photo_folder"
+path = os.path.join(DATA_DIR, folder_name)
 
 db_path = os.path.join(DATA_DIR, "database.db")
-path = os.path.join(DATA_DIR, "photo_folder")
-
 db = SqliteDatabase(db_path)
+
 
 
 class BaseModel(Model):
