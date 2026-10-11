@@ -68,7 +68,7 @@ def main(message):
     START_TIME[message.chat.id] = datetime.now()
 
     has_qr_code = len(message.text.split()) > 1
-
+    print(message.text)
     if not has_qr_code:
         admins = bot.get_chat_administrators(CHANNEL)
         for admin in admins:
